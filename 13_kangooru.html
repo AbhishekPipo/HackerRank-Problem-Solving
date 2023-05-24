@@ -33,40 +33,41 @@ function readLine() {
 }
 
 /*
- * Complete the 'diagonalDifference' function below.
+ * Complete the 'kangaroo' function below.
  *
- * The function is expected to return an INTEGER.
- * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+ * The function is expected to return a STRING.
+ * The function accepts following parameters:
+ *  1. INTEGER x1
+ *  2. INTEGER v1
+ *  3. INTEGER x2
+ *  4. INTEGER v2
  */
 
-function diagonalDifference(arr) {
-let l=0;
-let r=0;
-for(let i=0;i<arr.length;i++){
-    l+=arr[i][i];                      
-    r+=arr[i][arr.length-i-1]
+function kangaroo(x1, v1, x2, v2) {
+  if (v1 > v2) {
+    if ((x2 - x1) % (v1 - v2) === 0) {
+      return "YES";
+    }
+  }
+
+  return "NO";
 }
 
-
-
-
-
-return Math.abs(l-r);
-
-}
 
 function main() {
     const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
-    const n = parseInt(readLine().trim(), 10);
+    const firstMultipleInput = readLine().replace(/\s+$/g, '').split(' ');
 
-    let arr = Array(n);
+    const x1 = parseInt(firstMultipleInput[0], 10);
 
-    for (let i = 0; i < n; i++) {
-        arr[i] = readLine().replace(/\s+$/g, '').split(' ').map(arrTemp => parseInt(arrTemp, 10));
-    }
+    const v1 = parseInt(firstMultipleInput[1], 10);
 
-    const result = diagonalDifference(arr);
+    const x2 = parseInt(firstMultipleInput[2], 10);
+
+    const v2 = parseInt(firstMultipleInput[3], 10);
+
+    const result = kangaroo(x1, v1, x2, v2);
 
     ws.write(result + '\n');
 

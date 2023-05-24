@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
+}
+
+/*
+ * Complete the 'appendAndDelete' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts following parameters:
+ *  1. STRING s
+ *  2. STRING t
+ *  3. INTEGER k
+ */
+
+function appendAndDelete(s, t, k) {
+    const commonLength = Math.min(s.length, t.length);
+    let commonPrefix = 0;
+
+    // Find the common prefix length
+    while (commonPrefix < commonLength && s[commonPrefix] === t[commonPrefix]) {
+        commonPrefix++;
+    }
+
+    const minOperations = s.length + t.length - 2 * commonPrefix;
+
+    // Check if it is possible to convert s to t within k operations
+    return (k >= minOperations && (k - minOperations) % 2 === 0) || k >= s.length + t.length ? "Yes" : "No";
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const s = readLine();
+
+    const t = readLine();
+
+    const k = parseInt(readLine().trim(), 10);
+
+    const result = appendAndDelete(s, t, k);
+
+    ws.write(result + '\n');
+
+    ws.end();
+}
+
+    </script>
+</body>
+</html>

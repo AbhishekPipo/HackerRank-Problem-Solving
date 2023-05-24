@@ -10,8 +10,6 @@
     <script>
         'use strict';
 
-const fs = require('fs');
-
 process.stdin.resume();
 process.stdin.setEncoding('utf-8');
 
@@ -33,44 +31,37 @@ function readLine() {
 }
 
 /*
- * Complete the 'diagonalDifference' function below.
+ * Complete the 'extraLongFactorials' function below.
  *
- * The function is expected to return an INTEGER.
- * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+ * The function accepts INTEGER n as parameter.
  */
 
-function diagonalDifference(arr) {
-let l=0;
-let r=0;
-for(let i=0;i<arr.length;i++){
-    l+=arr[i][i];                      
-    r+=arr[i][arr.length-i-1]
-}
-
-
-
-
-
-return Math.abs(l-r);
-
-}
-
-function main() {
-    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
-
-    const n = parseInt(readLine().trim(), 10);
-
-    let arr = Array(n);
-
-    for (let i = 0; i < n; i++) {
-        arr[i] = readLine().replace(/\s+$/g, '').split(' ').map(arrTemp => parseInt(arrTemp, 10));
+function extraLongFactorials(number) {
+    // checking if number is negative
+    if (number < 0) {
+        console.log('1');
     }
 
-    const result = diagonalDifference(arr);
+    // if number is 0
+    else if (number === 0) {
+        console.log('1');
+    }
 
-    ws.write(result + '\n');
+    // if number is positive
+    else {
+        let fact = BigInt(1);
+        for (let i = 1; i <= number; i++) {
+            fact *= BigInt(i);
+        }
+        console.log(fact.toString());
+    }
+}
 
-    ws.end();
+
+function main() {
+    const n = parseInt(readLine().trim(), 10);
+
+    extraLongFactorials(n);
 }
 
     </script>
