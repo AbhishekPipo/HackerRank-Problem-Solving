@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function countingValleys(steps, path) {
+  let level = 0; // Current level
+  let count = 0; // Number of valleys
+
+  for (let i = 0; i < steps; i++) {
+    if (path.charAt(i) === 'U') {
+      level++;
+      if (level === 0) {
+        count++;
+      }
+    } else if (path.charAt(i) === 'D') {
+      level--;
+    }
+  }
+
+  return count;
+}
+
+    </script>
+</body>
+</html>
