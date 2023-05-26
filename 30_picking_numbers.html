@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
+}
+
+/*
+ * Complete the 'pickingNumbers' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts INTEGER_ARRAY a as parameter.
+ */
+
+function pickingNumbers(a) {
+    // Write your code here
+
+a.sort((a,b)=> a-b);
+let r=new Array(a.length);
+let b=0,count=0;
+for(let i=0;i<a.length;i++){
+    for(let j=i+1;j<a.length;j++){
+        let check=Math.abs(a[i]-a[j])
+        if(check<=1){
+            count++;
+        }
+    }
+    r[b]=count;
+    b++;
+    count=0;
+}
+let max=0;
+for(let x of r){
+    if(x>max){
+        max=x;
+    }
+}
+
+
+return max+1;
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const n = parseInt(readLine().trim(), 10);
+
+    const a = readLine().replace(/\s+$/g, '').split(' ').map(aTemp => parseInt(aTemp, 10));
+
+    const result = pickingNumbers(a);
+
+    ws.write(result + '\n');
+
+    ws.end();
+}
+
+    </script>
+</body>
+</html>
