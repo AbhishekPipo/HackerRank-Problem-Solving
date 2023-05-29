@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function cutTheSticks(arr) {
+  let result = []; // Array to store the number of sticks at each iteration
+  arr.sort((a, b) => a - b); // Sort the array in ascending order
+
+  while (arr.length > 0) {
+    result.push(arr.length); // Append the number of sticks to the result array
+    let minLength = arr[0]; // Get the length of the shortest stick
+
+    // Subtract the length of the shortest stick from each stick
+    arr = arr.map(stick => stick - minLength);
+
+    // Remove all sticks with a length of 0
+    arr = arr.filter(stick => stick !== 0);
+  }
+
+  return result;
+}
+
+    </script>
+</body>
+</html>
